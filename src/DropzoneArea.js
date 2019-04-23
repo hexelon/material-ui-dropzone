@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar';  
+import Snackbar from '@material-ui/core/Snackbar';
 import Dropzone from 'react-dropzone';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Grid from '@material-ui/core/Grid';
@@ -46,7 +46,7 @@ const styles = {
     uploadIconSize: {
         width: 51,
         height: 51,
-        color: '#909090' 
+        color: '#909090'
     },
     dropzoneParagraph:{
         fontSize: 24
@@ -70,7 +70,7 @@ class DropzoneArea extends Component{
             this.setState({
                 fileObjects: []
             })
-        } 
+        }
     }
     componentDidUpdate(prevProps){
         if(this.props.dropzoneText !== prevProps.dropzoneText){
@@ -85,7 +85,7 @@ class DropzoneArea extends Component{
         if(this.state.fileObjects.length + files.length > this.props.filesLimit){
             this.setState({
                 openSnackBar: true,
-                snackbarMessage: `Maximum allowed number of files exceeded. Only ${this.props.filesLimit} allowed`, 
+                snackbarMessage: `Maximum allowed number of files exceeded. Only ${this.props.filesLimit} allowed`,
                 snackbarVariant: 'error'
             });
         }else{
@@ -98,7 +98,7 @@ class DropzoneArea extends Component{
                         fileObjects: _this.state.fileObjects.concat({file: file, data: event.target.result})
                     },() => {
                         if(this.props.onChange){
-                            this.props.onChange(_this.state.fileObjects.map(fileObject => fileObject.file));    
+                            this.props.onChange(_this.state.fileObjects.map(fileObject => fileObject.file));
                         }
                         if(this.props.onDrop){
                             this.props.onDrop(file)
@@ -109,7 +109,7 @@ class DropzoneArea extends Component{
                             // display message when the last one fires
                             this.setState({
                                 openSnackBar: true,
-                                snackbarMessage: message, 
+                                snackbarMessage: message,
                                 snackbarVariant: 'success'
                             });
                         }
@@ -126,7 +126,7 @@ class DropzoneArea extends Component{
         fileObjects.splice(fileIndex, 1);
         this.setState(fileObjects,() => {
             if(this.props.onDelete){
-                this.props.onDelete(file);    
+                this.props.onDelete(file);
             }
             if(this.props.onChange){
                 this.props.onChange(this.state.fileObjects.map(fileObject => fileObject.file));
@@ -185,8 +185,8 @@ class DropzoneArea extends Component{
                         <CloudUploadIcon className={classes.uploadIconSize}/>
                     </div>
                     {showPreviewsInDropzone &&
-                        <PreviewList 
-                            fileObjects={this.state.fileObjects} 
+                        <PreviewList
+                            fileObjects={this.state.fileObjects}
                             handleRemove={this.handleRemove.bind(this)}
                             showFileNames={this.props.showFileNamesInPreview}
                         />
@@ -197,8 +197,8 @@ class DropzoneArea extends Component{
                         <Grid container>
                             <span>Preview:</span>
                         </Grid>
-                        <PreviewList 
-                            fileObjects={this.state.fileObjects} 
+                        <PreviewList
+                            fileObjects={this.state.fileObjects}
                             handleRemove={this.handleRemove.bind(this)}
                             showFileNames={this.props.showFileNamesInPreview}
                         />
@@ -219,7 +219,7 @@ class DropzoneArea extends Component{
                             variant={this.state.snackbarVariant}
                             message={this.state.snackbarMessage}
                         />
-                    </Snackbar>              
+                    </Snackbar>
                 }
             </Fragment>
         )
@@ -250,10 +250,10 @@ DropzoneArea.propTypes = {
     showPreviewsInDropzone: PropTypes.bool,
     showFileNamesInPreview: PropTypes.bool,
     showAlerts: PropTypes.bool,
-    clearOnUnmount: PropTypes.bool, 
+    clearOnUnmount: PropTypes.bool,
     onChange: PropTypes.func,
     onDrop: PropTypes.func,
     onDropRejected: PropTypes.func,
     onDelete: PropTypes.func
 }
-export default withStyles(styles)(DropzoneArea)
+export default withStyles(styles, { name: 'PreviewList' })(DropzoneArea)

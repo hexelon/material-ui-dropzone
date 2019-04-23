@@ -2,7 +2,7 @@ import React from "react";
 import {withStyles} from '@material-ui/core/styles';
 import {isImage} from './helpers/helpers.js';
 import Grid from '@material-ui/core/Grid';
-import DeleteIcon from '@material-ui/icons/Delete'; 
+import DeleteIcon from '@material-ui/icons/Delete';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import Fab from '@material-ui/core/Fab';
 
@@ -49,21 +49,21 @@ function PreviewList(props){
         <Grid container spacing={8}>
             {
                 fileObjects.map((fileObject, i) => {
-                    const img = (isImage(fileObject.file) ? 
+                    const img = (isImage(fileObject.file) ?
                     <img className={classes.smallPreviewImg} role="presentation" src={fileObject.data}/>
-                        : 
+                        :
                         <AttachFileIcon className={classes.smallPreviewImg}/>
                     );
                     return (
                         <Grid item xs={4} key={i} className={classes.imageContainer}>
                             {img}
-                            
+
                             {showFileNames &&
                                 <p>{fileObject.file.name}</p>
                             }
 
                             <Fab onClick={handleRemove(i)}
-                                aria-label="Delete" 
+                                aria-label="Delete"
                                 className={classes.removeBtn}>
                                 <DeleteIcon />
                             </Fab>
@@ -75,4 +75,4 @@ function PreviewList(props){
     )
 }
 
-export default withStyles(styles)(PreviewList);
+export default withStyles(styles, { name: 'PreviewList' })(PreviewList);
